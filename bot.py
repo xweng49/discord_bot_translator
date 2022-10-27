@@ -2,12 +2,12 @@ import discord
 import os
 from googletrans import Translator
 
-from discord.ext import commands
-
 intents = discord.Intents.all()
+
 client = discord.Client(intents=intents)
+token = os.environ['token']
 
-
+translator = Translator()
 
 @client.event
 async def on_ready():
@@ -15,13 +15,15 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    print(message)
-    if message.author == client.user:
+    if message.author==client.user:
         return
 
     if message.content.startswith('!ts'):
-        # print(message.content.)
-        await message.channel.send('hello!')
+        origin_message = message.content[3:].strip()
+        translation = translator.translate(origin_message, src='en', dest='ja')
 
-token = os.environ['token']
+        
+        await message.channel.send(f'{translation.text} \n{translation.pronunciation}')
+        
+
 client.run(token)
