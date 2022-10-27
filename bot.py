@@ -20,10 +20,15 @@ async def on_message(message):
 
     if message.content.startswith('!ts'):
         origin_message = message.content[3:].strip()
-        translation = translator.translate(origin_message, src='en', dest='ja')
+        
+        if origin_message:
+            translation = translator.translate(origin_message, src='en', dest='ja')
+            await message.channel.send(f'{translation.text} \n{translation.pronunciation}')
+        else:
+            await message.channel.send(f'Nothing to translate')
 
         
-        await message.channel.send(f'{translation.text} \n{translation.pronunciation}')
+        
         
 
 client.run(token)
