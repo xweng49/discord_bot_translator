@@ -1,8 +1,10 @@
 import interactions
 from language_dict import language_dict
 from googletrans import Translator
+import os
 
-from cred import token, guildId
+# from cred import token, guildId
+token = os.environ['token']
 
 translator = Translator()
 user_language = {'global':'ja'}
