@@ -26,7 +26,7 @@ async def ts(ctx: interactions.CommandContext, option: str):
     else:
         language = language_dict[user_language['global']]
         translation = translator.translate(option, src='en', dest=language)
-    await ctx.send(f"{translation.text}\n{translation.pronunciation}")
+    await ctx.send(f"{option}\n{translation.text}\n{translation.pronunciation}")
 
 """Translator bot settings"""
 @bot.command(description="Translator bot settings")
